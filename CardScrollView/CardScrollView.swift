@@ -17,6 +17,8 @@ extension UIColor {
     }
 }
 
+let π = 3.14159265358979323846264338327950288
+
 protocol CardScrollViewDataSource {
     func numberOfCards() -> Int
     func cardScrollView(cardScrollView:CardScrollView, cardAt index:Int) -> UIView
@@ -24,6 +26,7 @@ protocol CardScrollViewDataSource {
 
 @objc protocol CardScrollViewDelegate {
     @objc optional func cardScrollView(cardScrollView:CardScrollView, didSelectedCardAt index:Int)
+    @objc optional func cardScrollView(cardScrollView:CardScrollView, didScrollToCardAt index:Int)
 }
 
 class CardScrollView: UIView, UIScrollViewDelegate {
@@ -35,7 +38,9 @@ class CardScrollView: UIView, UIScrollViewDelegate {
     /// 卡片之间的间距
     var cardPadding:CGFloat = 0
     /// 卡片移动时的最大弧度
-    var cardAngle:CGFloat = 3.1415926 / 18
+    var cardAngle:CGFloat = (CGFloat(π) / 180) * 5
+    /// 当前显示的卡片索引
+    var currenIndex:Int = 0
     
     /// 数据源
     var dataSource:CardScrollViewDataSource?
@@ -161,6 +166,12 @@ class CardScrollView: UIView, UIScrollViewDelegate {
     // MARK: - UIScrollViewDelegate
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         self.loadData()
+        
+        let idx = Int(scrollView.contentOffset.x / scrollView.frame.size.width + 0.5)
+        if self.currenIndex != idx {
+            self.currenIndex = idx
+            self.delegate?.cardScrollView?(cardScrollView: self, didScrollToCardAt: idx)
+        }
     }
 
 }

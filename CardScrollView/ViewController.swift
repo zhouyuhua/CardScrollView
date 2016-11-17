@@ -80,6 +80,10 @@ class ViewController: UIViewController, CardScrollViewDataSource, CardScrollView
     func cardScrollView(cardScrollView: CardScrollView, didSelectedCardAt index: Int) {
         print("cardScrollView didSelectedCardAtIndex:\(index)")
     }
+    
+    func cardScrollView(cardScrollView: CardScrollView, didScrollToCardAt index: Int) {
+        print("cardScrollView didScrollToCardAt:\(index)")
+    }
 
 }
 

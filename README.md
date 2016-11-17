@@ -1,3 +1,3 @@
 # CardScrollView
 Card Scroll View
-![image](https://github.com/zhouyuhua/CardScrollView/raw/master/CardScrollView.gif)
+![image](https://github.com/zhouyuhua/CardScrollView/raw/master/cardScrollView.gif)
